@@ -13,15 +13,21 @@ Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-rails'
 Plugin 'msanders/snipmate.vim'
 Plugin 'bling/vim-airline'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'tpope/vim-fugitive'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'lsdr/monokai'
 Plugin 'lervag/vim-latex'
 Plugin 'nvie/vim-flake8'
 Plugin 'davidhalter/jedi-vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'jmcantrell/vim-virtualenv'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'juancamilo-nb/vim-cdproject'
+Plugin 'Soares/butane.vim'
+Plugin 'burnettk/vim-angular'
+
 
 
 
@@ -37,6 +43,7 @@ highlight Pmenu ctermfg=black ctermbg=white
 
 " nerd tree
 map <C-n> :NERDTreeTabsToggle<CR>
+map <leader>r :NERDTreeFind<cr>
 
 " line number
 set nu
@@ -57,15 +64,19 @@ set copyindent
 set nowrap
 
 " Syntax highlighting
-syntax enable
+syntax on
+
 if has('gui_running')
   set background=dark
-  colorscheme solarized
+  colorscheme monokai
   let g:airline_theme = 'solarized'
+  let g:nerdtree_tabs_open_on_gui_startup=0
+  let macvim_skip_cmd_opt_movement = 1
 else
-  let g:colors_name="railscasts"
+  let g:colors_name = "monokai"
   let g:airline_theme = 'murmur'
 endif
+
 if has("autocmd")
   filetype indent on
 endif
@@ -76,6 +87,20 @@ set ls=2
 " Show title in console title bar
 set title
 
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+" Buffers remap
+noremap <leader>bd :Bclose<CR>
+noremap <leader>bl :ls<CR>
+noremap <leader>bn :bn<CR>
+noremap <leader>bp :bp<CR>
+noremap <leader>bt :b#<CR>
+noremap <leader>bx :Bclose!<CR>
+
 " No backups
 set nobackup 
 set nowritebackup
@@ -83,9 +108,16 @@ set noswapfile
 
 if has("gui_running")
   set guioptions-=m
-  set guioptions-=T
+"  set guioptions-=T
   set guioptions-=rL
 endif
+
+set hidden
+set undofile
+set undodir=$HOME/.vim/undo
+set undolevels=1000
+set undoreload=10000
+
 
 augroup encrypted
   au!
@@ -114,4 +146,3 @@ augroup encrypted
   " after the file has been written.
   autocmd BufWritePost,FileWritePost *.gpg u
 augroup END
-
