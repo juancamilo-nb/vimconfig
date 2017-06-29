@@ -9,26 +9,56 @@ call vundle#begin("~/.vim/bundle")
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-Plugin 'tpope/vim-endwise'
+
+" Snippets
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'bonsaiben/bootstrap-snippets'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+
+Plugin 'vim-syntastic/syntastic'
+
+" Python
+Plugin 'nvie/vim-flake8'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'jmcantrell/vim-virtualenv'
+
+" HTML
+Plugin 'tpope/vim-ragtag'
+Plugin 'rstacruz/sparkup'
+
+" Javascript frameworks
+Plugin 'burnettk/vim-angular'
+Plugin 'mklabs/vim-backbone'
+
+" Ruby
 Plugin 'tpope/vim-rails'
-Plugin 'msanders/snipmate.vim'
+Plugin 'tpope/vim-endwise'
+
+" Appearance
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'lsdr/monokai'
-Plugin 'lervag/vim-latex'
-Plugin 'nvie/vim-flake8'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'jmcantrell/vim-virtualenv'
+
+" NerdTree
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'juancamilo-nb/vim-cdproject'
+
+" Buffer Management
 Plugin 'Soares/butane.vim'
-Plugin 'burnettk/vim-angular'
+
+" Latex
+Plugin 'lervag/vim-latex'
+
+" Git
+Plugin 'tpope/vim-fugitive'
 
 
+Plugin 'juancamilo-nb/vim-cdproject'
 
 
 " All of your Plugins must be added before the following line
@@ -66,6 +96,8 @@ set nowrap
 " Syntax highlighting
 syntax on
 
+set omnifunc=csscomplete#CompleteCSS
+
 if has('gui_running')
   set background=dark
   colorscheme monokai
@@ -100,6 +132,7 @@ noremap <leader>bn :bn<CR>
 noremap <leader>bp :bp<CR>
 noremap <leader>bt :b#<CR>
 noremap <leader>bx :Bclose!<CR>
+noremap <leader>bh :hide<CR>
 
 " No backups
 set nobackup 
@@ -146,3 +179,19 @@ augroup encrypted
   " after the file has been written.
   autocmd BufWritePost,FileWritePost *.gpg u
 augroup END
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+noremap <leader>bs :SyntasticToggleMode<CR>
+
+
+" Trigger configuration. Do not use <tab> if you use
+" https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
