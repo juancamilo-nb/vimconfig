@@ -32,6 +32,7 @@ Plugin 'rstacruz/sparkup'
 " Javascript frameworks
 Plugin 'burnettk/vim-angular'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'Quramy/tsuquyomi'
 
 " Appearance
 Plugin 'bling/vim-airline'
@@ -147,6 +148,7 @@ set undodir=$HOME/.vim/undo
 set undolevels=1000
 set undoreload=10000
 
+set backspace=indent,eol,start
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
