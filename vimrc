@@ -14,8 +14,13 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 
+"Sintax"
 Plugin 'vim-syntastic/syntastic'
 Plugin 'lifepillar/vim-mucomplete'
+
+" Git
+Plugin 'tpope/vim-fugitive'
+
 
 " Python
 Plugin 'davidhalter/jedi-vim'
