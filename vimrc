@@ -151,7 +151,7 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers = ['pylint']
 noremap <leader>bs :SyntasticToggleMode<CR>
 
-" imap <c-j> <plug>(MUcompleteFwd)
+noremap <c-b> :Gblame<CR>
 set completeopt+=menuone
 set completeopt+=noselect
 let g:mucomplete#enable_auto_at_startup = 1
