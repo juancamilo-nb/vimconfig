@@ -11,28 +11,17 @@ call vundle#begin("~/.vim/bundle")
 Plugin 'gmarik/Vundle.vim'
 
 " Snippets
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
-Plugin 'bonsaiben/bootstrap-snippets'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 
 Plugin 'vim-syntastic/syntastic'
+Plugin 'lifepillar/vim-mucomplete'
 
 " Python
-Plugin 'nvie/vim-flake8'
 Plugin 'davidhalter/jedi-vim'
-Plugin 'jmcantrell/vim-virtualenv'
 
 " HTML
-Plugin 'tpope/vim-ragtag'
 Plugin 'rstacruz/sparkup'
-
-" Javascript frameworks
-Plugin 'burnettk/vim-angular'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'Quramy/tsuquyomi'
 
 " Appearance
 Plugin 'bling/vim-airline'
@@ -42,7 +31,6 @@ Plugin 'lsdr/monokai'
 
 " NerdTree
 Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 " Buffer Management
@@ -51,12 +39,8 @@ Plugin 'Soares/butane.vim'
 " Latex
 Plugin 'lervag/vim-latex'
 
-" Git
-Plugin 'tpope/vim-fugitive'
-
-
+Plugin 'jceb/vim-orgmode'
 Plugin 'juancamilo-nb/vim-cdproject'
-
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -65,7 +49,7 @@ filetype plugin indent on    " required
 
 " colors
 set t_Co=256
-set completeopt=menu,preview,longest
+" set completeopt=menu,preview,longest
 highlight Pmenu ctermfg=black ctermbg=white
 
 " nerd tree
@@ -81,6 +65,8 @@ set shiftwidth=4
 set expandtab
 set fileformat=unix
 
+syntax on
+
 " Indentation
 set autoindent
 set cindent
@@ -90,20 +76,23 @@ set copyindent
 " No line wrapping
 set nowrap
 
-" Syntax highlighting
-syntax on
-
 set omnifunc=csscomplete#CompleteCSS
 
 if has('gui_running')
   set background=dark
   colorscheme monokai
-  let g:airline_theme = 'solarized'
-  let g:nerdtree_tabs_open_on_gui_startup=0
+  let g:airline_theme = 'luna'
   let macvim_skip_cmd_opt_movement = 1
 else
-  let g:colors_name = "monokai"
-  let g:airline_theme = 'murmur'
+  let g:airline_powerline_fonts = 1
+  if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+  endif
+  let g:airline_symbols.space = "\ua0"
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#show_buffers = 0
+  let g:airline_theme = 'minimalist'
+  let g:colors_name = "solarized"
 endif
 
 if has("autocmd")
@@ -154,4 +143,15 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
+let g:syntastic_python_checkers = ['pylint']
 noremap <leader>bs :SyntasticToggleMode<CR>
+
+" imap <c-j> <plug>(MUcompleteFwd)
+set completeopt+=menuone
+set completeopt+=noselect
+let g:mucomplete#enable_auto_at_startup = 1
+set belloff+=ctrlg
+
+let g:UltiSnipsExpandTrigger="<c-Space>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
