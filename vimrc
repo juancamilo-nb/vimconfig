@@ -53,7 +53,7 @@ set t_Co=256
 highlight Pmenu ctermfg=black ctermbg=white
 
 " nerd tree
-map <C-n> :NERDTreeTabsToggle<CR>
+map <C-n> :NERDTreeToggle<CR>
 map <leader>r :NERDTreeFind<cr>
 
 " line number
