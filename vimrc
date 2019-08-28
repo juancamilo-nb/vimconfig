@@ -14,19 +14,30 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 
-"Sintax"
-Plugin 'vim-syntastic/syntastic'
+" Sintax
+Plugin 'dense-analysis/ale'
+
+
+" Autocomplete
 Plugin 'lifepillar/vim-mucomplete'
 
 " Git
 Plugin 'tpope/vim-fugitive'
 
-
 " Python
 Plugin 'davidhalter/jedi-vim'
 
+" React
+Plugin 'mxw/vim-jsx'
+Plugin 'pangloss/vim-javascript'
+Plugin 'peitalin/vim-jsx-typescript'
+Plugin 'elzr/vim-json'
+Plugin 'Shougo/deoplete.nvim'
+Plugin 'roxma/nvim-yarp'
+Plugin 'roxma/vim-hug-neovim-rpc'
+
 " HTML
-Plugin 'rstacruz/sparkup'
+Plugin 'alvan/vim-closetag'
 
 " Appearance
 Plugin 'bling/vim-airline'
@@ -43,8 +54,6 @@ Plugin 'Soares/butane.vim'
 
 " Latex
 Plugin 'lervag/vim-latex'
-
-Plugin 'jceb/vim-orgmode'
 Plugin 'juancamilo-nb/vim-cdproject'
 
 " All of your Plugins must be added before the following line
@@ -60,6 +69,7 @@ highlight Pmenu ctermfg=black ctermbg=white
 " nerd tree
 map <C-n> :NERDTreeToggle<CR>
 map <leader>r :NERDTreeFind<cr>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " line number
 set nu
@@ -67,6 +77,7 @@ set nu
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
+set noexpandtab
 set expandtab
 set fileformat=unix
 
@@ -125,8 +136,12 @@ noremap <leader>bt :b#<CR>
 noremap <leader>bx :Bclose!<CR>
 noremap <leader>bh :hide<CR>
 
+" Window navigation
+map <C-J> <C-W>j<C-W>_
+map <C-K> <C-W>k<C-W>_
+
 " No backups
-set nobackup 
+set nobackup
 set nowritebackup
 set noswapfile
 
@@ -144,14 +159,11 @@ set undoreload=10000
 
 set backspace=indent,eol,start
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_python_checkers = ['pylint']
-noremap <leader>bs :SyntasticToggleMode<CR>
+let b:ale_linters = ['eslint', 'pylint']
+let g:airline#extensions#ale#enabled = 1
+let g:ale_set_quickfix = 1
 
-noremap <c-b> :Gblame<CR>
+noremap <c-a> :Gblame<CR>
 set completeopt+=menuone
 set completeopt+=noselect
 let g:mucomplete#enable_auto_at_startup = 1
@@ -160,3 +172,10 @@ set belloff+=ctrlg
 let g:UltiSnipsExpandTrigger="<c-Space>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml, *.js, *.jsx'
+let g:deoplete#enable_at_startup = 1
+
+" Comment in python
+vnoremap <silent> # :s/^/#/<cr>:noh<cr>
+vnoremap <silent> -# :s/^#//<cr>:noh<cr>
