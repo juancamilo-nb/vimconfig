@@ -17,7 +17,6 @@ Plugin 'honza/vim-snippets'
 " Sintax
 Plugin 'dense-analysis/ale'
 
-
 " Autocomplete
 Plugin 'lifepillar/vim-mucomplete'
 
