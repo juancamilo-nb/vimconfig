@@ -17,9 +17,6 @@ Plugin 'honza/vim-snippets'
 " Sintax
 Plugin 'dense-analysis/ale'
 
-" Autocomplete
-Plugin 'lifepillar/vim-mucomplete'
-
 " Git
 Plugin 'tpope/vim-fugitive'
 
@@ -52,7 +49,6 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'Soares/butane.vim'
 
 " Latex
-Plugin 'lervag/vim-latex'
 Plugin 'juancamilo-nb/vim-cdproject'
 
 " All of your Plugins must be added before the following line
@@ -158,14 +154,14 @@ set undoreload=10000
 
 set backspace=indent,eol,start
 
-let b:ale_linters = ['eslint', 'pylint']
+let g:ale_linters = {'javascript': ['eslint'], 'python': ['pylint']}
+let g:ale_fixers = {'javascript': ['prettier']}
 let g:airline#extensions#ale#enabled = 1
 let g:ale_set_quickfix = 1
 
 noremap <c-a> :Gblame<CR>
 set completeopt+=menuone
 set completeopt+=noselect
-let g:mucomplete#enable_auto_at_startup = 1
 set belloff+=ctrlg
 
 let g:UltiSnipsExpandTrigger="<c-Space>"
